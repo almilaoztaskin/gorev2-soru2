@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soru-2</title>
+</head>
+
+<body>
+    <form onsubmit="uret(event)">
+
+        <table>
+            <tr>
+                <thead>
+                    <td><label for="minValue">Minimum Değer:</label><br></td>
+                </thead>
+
+                <td><input type="range" id="minValue" name="minValue" min="0" max="100" value="50"></td>
+                <td><button type="button" onclick="selectMinValue()">Seç</button></td>
+                <td><input type="text" id="selectedMinValue" name="selectedMinValue" readonly></td>
+            </tr>
+            <tr>
+                <thead>
+                    <td><label for="maxValue">Maximum Değer:</label></td>
+                </thead>
+
+                <td><input type="range" id="maxValue" name="maxValue" min="0" max="100" value="50"></td>
+                <td><button type="button" onclick="selectMaxValue()">Seç</button></td>
+                <td><input type="text" id="selectedMaxValue" name="selectedMaxValue" readonly></td>
+            </tr>
+        </table>
+        <br>
+
+        <button type="button" onclick="checkAndGenerateRandomNumber()">Üret</button><br><br>
+
+        <hr>
+
+        <p id="randomNumber"><span>Rastgele Sayı : </span></p>
+    </form>
+
+    <script>
+
+        function selectMinValue() {
+            var minValue = document.getElementById('minValue').value;
+            document.getElementById('selectedMinValue').value = minValue;
+        }
+
+        function selectMaxValue() {
+            var maxValue = document.getElementById('maxValue').value;
+            document.getElementById('selectedMaxValue').value = maxValue;
+        }
+
+        function checkAndGenerateRandomNumber() {
+            var minValueSelected = document.getElementById('selectedMinValue').value;
+            var maxValueSelected = document.getElementById('selectedMaxValue').value;
+
+            if (minValueSelected === "" || maxValueSelected === "") {
+                alert("Lütfen her iki değeri de seçin.");
+                return;
+            }
+
+            generateRandomNumber();
+        }
+
+        function generateRandomNumber() {
+            var minValue = parseInt(document.getElementById('minValue').value);
+            var maxValue = parseInt(document.getElementById('maxValue').value);
+            var randomNumber = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+
+            document.getElementById("randomNumber").innerText = "Rastgele Sayı : " + randomNumber;
+        }
+    </script>
+</body>
+
+</html>
